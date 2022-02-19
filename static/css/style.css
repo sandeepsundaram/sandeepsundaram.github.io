@@ -1,0 +1,28 @@
+html,body{
+    height: 90%;
+}
+a:hover{
+    text-decoration: underline;
+}
+.typing{
+    font-color:gray;
+    display: none;
+    font-style: italic;
+    margin-left: 6px;
+}
+.nav-wrapper {
+    background-color: #fff;
+}
+
+.nav-wrapper  ul > li > a {
+    font-size: 20px;
+    color:#212121;
+}
+
+.nav-wrapper  ul > li > a:hover {
+    background-color: #fff;
+}
+.nav-wrapper > a.brand-logo{
+    margin-left: 15px;
+    color:#757575;
+}
