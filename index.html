@@ -3,108 +3,676 @@
 <head>
     <meta charset="utf-8">
     <title>Sandeep Sundaram</title>
-    <meta name="Description" content="Welcome to Sandeep Sundaram's personal web space">
-    <meta name="Keywords" content="Sandeep,Sandeep Sundaram">
+    <meta name="Description" content="Interactive Resume of Sandeep Sundaram">
+    <meta name="Keywords" content="Sandeep,Sandeep Sundaram,Resume,Full Stack Engineer">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link rel="stylesheet" href="static/css/materialize.min.css">
-    <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .resume-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        .profile-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 1rem;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .title {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
+        .section:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            transition: width 0.5s ease;
+        }
+
+        .section-title:hover::after {
+            width: 100%;
+        }
+
+        .summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-category:hover::before {
+            left: 100%;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .experience-list {
+            list-style: none;
+        }
+
+        .experience-item {
+            background: #f8f9fa;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #4facfe;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-item h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            border-radius: 10px;
+            width: 0;
+            transition: width 2s ease;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            counter-reset: number;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid rgba(255, 255, 255, 0.7);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: rgba(255, 255, 255, 0.7); }
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<nav class="z-depth-0">
-    <div class="nav-wrapper ">
-        <a href="https://dataequity.io/" target="_blank" class="brand-logo left hide-on-med-and-down">Data Equity Ltd</a>
-        <ul id="nav-mobile" class="right">
-            <li><a href="https://github.com/sandeepsundaram" target="_blank">Github</a></li>
-            <li><a href="https://www.linkedin.com/in/sandeepsundaram/" target="_blank">LinkedIn</a></li>            
-            <li><a href="https://twitter.com/mssandy" target="_blank">Twitter</a></li>
-        </ul>
+    <div class="resume-container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="static/img/sandeep.webp" 
+                     alt="Sandeep Sundaram" class="profile-img" onclick="animateProfile()">
+                <h1 class="name">Sandeep Sundaram</h1>
+                <p class="title typing-animation">Polyglot Programmer & Full Stack Engineer</p>
+                <div class="social-links">
+                    <a href="https://github.com/sandeepsundaram" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/sandeepsundaram/" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/mssandy" target="_blank" class="social-link">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://dataequity.io/" target="_blank" class="social-link">
+                        <i class="fas fa-building"></i> Data Equity Ltd
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-user"></i> Professional Summary</h2>
+                <p class="summary">
+                    Results-driven Full Stack Engineer with 20+ years of end-to-end technology leadership across diverse sectors including Energy, Open Banking, CRM, and Industrial SCADA systems. Demonstrated expertise in architecting and delivering scalable solutions with a deep command over API ecosystems, AI/ML integrations, DevOps automation, and cloud-native architectures (AWS, GCP, Azure). Adept at bridging business objectives with technical execution, having successfully led cross-functional, international teams to deliver mission-critical systems. Known for solving complex enterprise problems with a forward-thinking, product-led mindset and a passion for driving innovation at scale.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> Career Highlights</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="21">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-label">Technologies Mastered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label">Team Members Led</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i> Technical Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category" onclick="expandSkills(this)">
+                        <h3><i class="fas fa-server"></i> Backend Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Java/J2EE</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">GraphQL</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="95"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category" onclick="expandSkills(this)">
+                        <h3><i class="fas fa-brain"></i> AI/Machine Learning</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">Neural Networks</span>
+                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">Transformers</span>
+                            <span class="skill-tag">Computer Vision</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="88"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category" onclick="expandSkills(this)">
+                        <h3><i class="fas fa-desktop"></i> Frontend Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">responsive Design</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="85"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category" onclick="expandSkills(this)">
+                        <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">GCP</span>
+                            <span class="skill-tag">Docker</span>                            
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="92"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category" onclick="expandSkills(this)">
+                        <h3><i class="fas fa-database"></i> Databases</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Oracle</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">DynamoDB</span>
+                            <span class="skill-tag">MongoDB</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="90"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category" onclick="expandSkills(this)">
+                        <h3><i class="fas fa-plug"></i> Integration</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Apigee</span>
+                            <span class="skill-tag">MuleSoft</span>
+                            <span class="skill-tag">IBM DataPower</span>
+                            <span class="skill-tag">Oracle Fusion</span>
+                            <span class="skill-tag">Microservices</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="93"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i> Core Competencies</h2>
+                <ul class="experience-list">
+                    <li class="experience-item">
+                        <h4><i class="fas fa-cogs"></i> Integration & Microservices Practice Leadership</h4>
+                        <p>Leading enterprise-wide integration strategies and microservices architecture implementations across multiple domains.</p>
+                    </li>
+                    <li class="experience-item">
+                        <h4><i class="fas fa-users"></i> Global Team Leadership</h4>
+                        <p>Managing and empowering international development teams, fostering collaboration across different time zones and cultures.</p>
+                    </li>
+                    <li class="experience-item">
+                        <h4><i class="fas fa-rocket"></i> API & Developer Portal Strategy</h4>
+                        <p>Designing and implementing comprehensive API strategies with focus on developer experience and platform adoption.</p>
+                    </li>
+                    <li class="experience-item">
+                        <h4><i class="fas fa-sitemap"></i> Enterprise Architecture</h4>
+                        <p>Architecting scalable, resilient systems that support business growth and digital transformation initiatives.</p>
+                    </li>
+                    <li class="experience-item">
+                        <h4><i class="fas fa-lightbulb"></i> Problem Solving Excellence</h4>
+                        <p>Chief Problem Solver with expertise in analyzing complex business challenges and delivering innovative technical solutions.</p>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <p><i class="fas fa-code"></i> C0d3r for Life | <i class="far fa-copyright"></i> 2025 Sandeep Sundaram</p>
+        </footer>
     </div>
-</nav>
 
-<div class="container">
-    <p class="center-align intro" style="font-size:40px;">
-        <b>Hey! <i class="material-icons" style="font-size:30px;color:green;">sentiment_very_satisfied</i><i class="material-icons" style="font-size:30px;color:green;">waving_hand</i><br>
-        My name is Sandeep Sundaram.</b><img src="static/img/sandeep.webp" alt="Avatar"><br>
-    </p>
-    <p style="width:100%;font-size:23px;">
-        I'm a <b style="color:#4cae4c;">Polyglot Programmer</b> and a <b style="color:#4cae4c;">Full Stack Engineer</b> with 2 decades of experience in various roles. <br>
-        I work on <b style="color:#4cae4c;">APIs, AI, Devops and Cloud.</b> <br>
-        I am skilled in the following: <br>
-    </p>
-        <table>
-          <tr>
-            <td>Domain</td>
-            <td>Energy, Open-Banking, CRM, Work and asset management, SCADA</td>        
-          </tr>
-          <tr>
-            <td>Languages</td>
-            <td>Java/J2EE, Python, Node JS, Javascript, Typescript</td>            
-          </tr>
-          <tr>
-            <td>AI/ML</td>
-            <td>Linear Algebra, Calculus, Optimizers, PyTorch, ANN, CNN, RNN, NLP, Transformers</td>            
-          </tr>
-          <tr>
-            <td>UI Frameworks</td>
-            <td>Angular, React, JSP</td>        
-          </tr>
-          <tr>
-            <td>Internet Technologies</td>
-            <td>SOAP, REST, GraphQL, Websockets, Servlets, EJB</td>
-          </tr>          
-          <tr>
-            <td>Integration Technologies</td>
-            <td>Oracle Fusion Middleware, Apigee, Mulesoft, Opentext Cordys, IIB, IBM Datapower, IBM MQ, JAX-RS, JAX-WS, AWS API Manager, Azure API manager</td>        
-          </tr>
-          <tr>
-            <td>Web/Application Servers</td>
-            <td>Tomcat, Weblogic, OAS, Websphere, Express</td>        
-          </tr>
-          <tr>
-            <td>Databases</td>
-            <td>Oracle, MS SQL Server, MySQL, DynamoDB, Postgres, H2, MS Access</td>        
-          </tr>          
-          <tr>
-            <td>Tools/IDEs</td>
-            <td>VS Code, PyCharm, Eclipse, JIDEA, JDeveloper, GitHub, SoapUI, JMeter, Toad, Postman</td>        
-          </tr>
-          <tr>
-            <td>Cloud</td>
-            <td>AWS, Azure, GCP</td>        
-          </tr>
-          <tr>
-            <td>Operating Systems</td>
-            <td>Windows, Unix, MacOS</td>        
-          </tr>
-        </table> <br>
-      <p style="width:100%;font-size:25px;">I cover all aspects of technology including</p>
-      <ul>
-        <li>Supervised and unsupervised learning</li>
-        <li>Integration and Microservices Practice Leadership</li>
-        <li>Grow and empower international teams</li>      
-        <li>Lead global initiatives</li> 
-        <li>API and Developer Portal strategy Leadership</li>        
-        <li>Enterprise Architecture</li> 
-        <li>Application Architecture</li>
-        <li>Chief Problem Solver</li>
-        <li>C0d3r for life</li>
-      </ul>
-</div>
+    <script>
+        // Animate counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current);
+                }, 16);
+            });
+        }
 
-<footer class="footer">
-    <div class="container">
-      <span class="text-muted"><i class="material-icons" style="font-size:10px;">copyright</i></span> Sandeep Sundaram
-    </div>
-</footer>
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 500);
+            });
+        }
 
+        // Profile image animation
+        function animateProfile() {
+            const img = document.querySelector('.profile-img');
+            img.style.transform = 'scale(1.2) rotate(360deg)';
+            setTimeout(() => {
+                img.style.transform = 'scale(1) rotate(0deg)';
+            }, 1000);
+        }
+
+        // Expand skills animation
+        function expandSkills(element) {
+            element.style.transform = 'scale(1.05)';
+            element.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+            }, 300);
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.querySelector('.stat-number')) {
+                        animateCounters();
+                    }
+                    if (entry.target.querySelector('.progress-fill')) {
+                        animateProgressBars();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Add hover effects to skill tags
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', () => {
+                    tag.style.transform = 'scale(1.1) rotate(2deg)';
+                });
+                tag.addEventListener('mouseleave', () => {
+                    tag.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Add click effects to experience items
+            const experienceItems = document.querySelectorAll('.experience-item');
+            experienceItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+                    item.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        item.style.background = '#f8f9fa';
+                        item.style.color = '#333';
+                    }, 1000);
+                });
+            });
+        });
+
+        // Add floating particles effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(79, 172, 254, 0.3)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = '100vh';
+            particle.style.zIndex = '1';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: 'translateY(-100vh) rotate(360deg)', opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Create particles occasionally
+        setInterval(createParticle, 300);
+    </script>
 </body>
 </html>
