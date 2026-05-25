@@ -694,6 +694,29 @@
       .writing-item { grid-template-columns: 1fr; }
       .writing-meta { order: -1; }
     }
+
+    /* === Skills === */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-cat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+    }
+    .skill-cat h4 {
+      font-size: 0.85rem;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   </style>
 </head>
 
@@ -1072,6 +1095,52 @@
         <a class="writing-viewall" href="https://dataequity.medium.com/" target="_blank" rel="noopener">
           View all on Medium <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i>
         </a>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-eyebrow">Toolkit</div>
+        <h2 class="section-title" id="skills-title">What I build with.</h2>
+
+        <div class="skills-grid">
+          <div class="skill-cat">
+            <h4>Languages</h4>
+            <div class="skill-tags">
+              <span class="tag">python</span><span class="tag">java</span><span class="tag">node</span><span class="tag">javascript</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <h4>Frontend</h4>
+            <div class="skill-tags">
+              <span class="tag">react</span><span class="tag">angular</span><span class="tag">flask</span><span class="tag">html5</span><span class="tag">css3</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <h4>Cloud &amp; DevOps</h4>
+            <div class="skill-tags">
+              <span class="tag">aws</span><span class="tag">azure</span><span class="tag">gcp</span><span class="tag">docker</span><span class="tag">jenkins</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <h4>API &amp; integration</h4>
+            <div class="skill-tags">
+              <span class="tag">apigee</span><span class="tag">mulesoft</span><span class="tag">fastapi</span><span class="tag">azure api mgr</span><span class="tag">datapower</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <h4>Data</h4>
+            <div class="skill-tags">
+              <span class="tag">oracle</span><span class="tag">postgres</span><span class="tag">mongodb</span><span class="tag">mysql</span><span class="tag">dynamodb</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <h4>Domain</h4>
+            <div class="skill-tags">
+              <span class="tag">energy &amp; utilities</span><span class="tag">open banking</span><span class="tag">erp</span><span class="tag">peppol</span><span class="tag">ai</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
