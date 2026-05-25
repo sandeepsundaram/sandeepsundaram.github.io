@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
   <title>Sandeep Sundaram — Engineering Leader & Cofounder</title>
 
   <!-- Theme bootstrap: runs before paint to avoid FOUC -->
@@ -90,6 +91,9 @@
       padding: var(--section-y) 0;
     }
 
+    main { scroll-margin-top: 72px; }
+    main:focus { outline: none; }
+
     /* === Accessibility helpers === */
     .skip-link {
       position: absolute;
@@ -118,13 +122,164 @@
         scroll-behavior: auto !important;
       }
     }
+
+    /* === Nav === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(0px);
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
+    }
+
+    .nav.is-scrolled {
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover, .nav-link.is-active { color: var(--text); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      background: var(--accent);
+      color: white !important;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35); }
+
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      color: var(--text-muted);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .theme-toggle:hover { color: var(--text); background: var(--surface); }
+    .theme-toggle [data-theme-icon='light'] { display: none; }
+    [data-theme='light'] .theme-toggle [data-theme-icon='dark'] { display: none; }
+    [data-theme='light'] .theme-toggle [data-theme-icon='light'] { display: inline-flex; }
+
+    /* Mobile menu */
+    .nav-burger { display: none; }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .nav-burger {
+        display: inline-flex;
+        width: 36px;
+        height: 36px;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius);
+        color: var(--text-muted);
+      }
+      .nav-burger:hover { color: var(--text); background: var(--surface); }
+      .nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 200;
+        display: none;
+        flex-direction: column;
+        padding: 80px 24px 40px;
+        gap: 24px;
+      }
+      .nav-overlay.is-open { display: flex; }
+      .nav-overlay a { font-size: 1.5rem; font-weight: 600; }
+      .nav-overlay-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <main id="main">
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">Sandeep</a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a class="nav-link" href="#work">Work</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#writing">Writing</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" aria-pressed="false">
+          <i data-lucide="moon" data-theme-icon="dark"></i>
+          <i data-lucide="sun" data-theme-icon="light"></i>
+        </button>
+        <a class="nav-cta" href="https://www.linkedin.com/in/sandeepsundaram/" target="_blank" rel="noopener">
+          Connect <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i>
+        </a>
+        <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <button class="nav-overlay-close" id="navOverlayClose" aria-label="Close menu">
+      <i data-lucide="x"></i>
+    </button>
+    <a href="#work">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#writing">Writing</a>
+    <a href="#about">About</a>
+    <a href="https://www.linkedin.com/in/sandeepsundaram/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+  </div>
+
+  <main id="main" tabindex="-1">
     <div class="container">
       <h1>Sandeep Sundaram</h1>
       <p>Scaffold in progress.</p>
@@ -132,9 +287,50 @@
   </main>
 
   <script>
-    // Initialize Lucide icons after DOM is ready
     document.addEventListener('DOMContentLoaded', function () {
       if (window.lucide) window.lucide.createIcons();
+
+      // Theme toggle
+      var themeToggle = document.getElementById('themeToggle');
+      function syncThemePressed() {
+        var theme = document.documentElement.dataset.theme;
+        themeToggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+      }
+      syncThemePressed();
+      themeToggle.addEventListener('click', function () {
+        var current = document.documentElement.dataset.theme;
+        var next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        syncThemePressed();
+      });
+
+      // Nav scroll state
+      var nav = document.getElementById('nav');
+      function onScroll() {
+        if (window.scrollY > 8) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Mobile menu
+      var burger = document.getElementById('navBurger');
+      var overlay = document.getElementById('navOverlay');
+      var overlayClose = document.getElementById('navOverlayClose');
+      function openMenu() {
+        overlay.classList.add('is-open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        overlay.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      burger.addEventListener('click', openMenu);
+      overlayClose.addEventListener('click', closeMenu);
+      overlay.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
     });
   </script>
 </body>
