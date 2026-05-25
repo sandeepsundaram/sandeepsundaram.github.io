@@ -832,7 +832,6 @@
         --text-muted: #444;
         --section-y: 24px;
       }
-      [data-theme] { /* force light palette regardless of state */ }
       body { background: #fff; color: #111; }
 
       .nav, .pdf-btn, .theme-toggle, .nav-burger, .nav-overlay, .hero-orb,
@@ -849,7 +848,6 @@
 
       .project { break-inside: avoid; border: 1px solid var(--border); }
       .project-body { display: grid !important; }
-      details.project { /* force open in print */ }
       details.project > .project-body { display: grid !important; }
       details.earlier-roles > * { display: block !important; }
 
@@ -1492,6 +1490,23 @@
           if (preExpanded.has(d)) d.open = preExpanded.get(d);
         });
       });
+
+    // Active section highlighting in nav
+    var navLinks = document.querySelectorAll('.nav-link');
+    var sections = document.querySelectorAll('main > section[id]');
+    if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var id = entry.target.id;
+          navLinks.forEach(function (link) {
+            var matches = link.getAttribute('href') === '#' + id;
+            link.classList.toggle('is-active', matches);
+          });
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      sections.forEach(function (s) { sectionObserver.observe(s); });
+    }
     });
   </script>
 </body>
