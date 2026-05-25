@@ -516,6 +516,116 @@
     .earlier-roles[open] summary::after { transform: rotate(180deg); }
     .earlier-roles summary:hover { color: var(--text); }
     .earlier-roles .work-item:first-of-type { padding-top: 24px; }
+
+    /* === Projects === */
+    .projects-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .project:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); }
+    .project[open] { border-color: color-mix(in srgb, var(--accent) 60%, var(--border)); }
+
+    .project-summary {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 24px 28px;
+      cursor: pointer;
+      list-style: none;
+    }
+    .project-summary::-webkit-details-marker { display: none; }
+
+    .project-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+    .project-title { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
+    .project-company { color: var(--accent); font-weight: 500; margin-left: 8px; }
+    .project-year { font-family: var(--mono); font-size: 0.85rem; color: var(--text-muted); }
+    .project-value { color: var(--text-muted); font-size: 1rem; }
+
+    .project-metric {
+      font-family: var(--mono);
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .project-toggle {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .project-summary:hover .project-toggle { color: var(--text); }
+    .project-toggle::after { content: '↓'; transition: transform 0.2s ease; }
+    .project[open] .project-toggle::after { transform: rotate(180deg); }
+    .project[open] .project-toggle-label::after { content: 'Hide case study'; }
+    .project-toggle-label::after { content: 'Read case study'; }
+
+    .project-body {
+      padding: 0 28px 28px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      gap: 20px;
+    }
+
+    .case-block h4 {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      margin-top: 16px;
+    }
+    .case-block p, .case-block li { color: var(--text-muted); line-height: 1.7; }
+    .case-block ul { list-style: none; }
+    .case-block ul li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+    }
+    .case-block ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    .case-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+    .case-link:hover { text-decoration: underline; }
+
+    @media (max-width: 720px) {
+      .project-summary { grid-template-columns: 1fr; }
+      .project-metric { text-align: left; font-size: 1.25rem; }
+    }
   </style>
 </head>
 
@@ -726,6 +836,157 @@
             </li>
           </details>
         </ol>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-eyebrow">Projects</div>
+        <h2 class="section-title" id="projects-title">Selected case studies.</h2>
+
+        <div class="projects-grid">
+
+          <details class="project">
+            <summary class="project-summary">
+              <div>
+                <div class="project-head">
+                  <div>
+                    <span class="project-title">AI-Powered API Schema Builder</span>
+                    <span class="project-company">· Data Equity</span>
+                  </div>
+                  <div class="project-year">2023</div>
+                </div>
+                <div class="project-value">Generative-AI schema designer trained on 16,000+ API definitions, paired with a RAG enterprise contract generator.</div>
+                <div class="project-toggle"><span class="project-toggle-label"></span></div>
+              </div>
+              <div class="project-metric">60% automation lift</div>
+            </summary>
+            <div class="project-body">
+              <div class="case-block">
+                <h4>Problem</h4>
+                <p>Enterprise API teams spend weeks turning ideas into well-formed, consistent API contracts, and even longer drafting the legal contracts that govern their use. We wanted to compress both into minutes without losing the rigour.</p>
+              </div>
+              <div class="case-block">
+                <h4>Approach</h4>
+                <ul>
+                  <li>Fine-tuned a generative model on a corpus of 16,000+ OpenAPI definitions to suggest endpoints, schemas, and naming conventions matching house style.</li>
+                  <li>Built a RAG pipeline over enterprise contract templates so the generator could draft clause-level language grounded in real precedent.</li>
+                  <li>Wrapped both in a React workspace with reviewer-friendly diffs and one-click export to OpenAPI / Word.</li>
+                </ul>
+              </div>
+              <div class="case-block">
+                <h4>Impact</h4>
+                <ul>
+                  <li>60% lift in document automation efficiency for enterprise contract drafting.</li>
+                  <li>Anchor capability for Data Equity's commercial launch — first ARR landed within the first year.</li>
+                </ul>
+              </div>
+              <div class="case-block">
+                <h4>Stack</h4>
+                <div class="work-tags">
+                  <span class="tag">python</span><span class="tag">pytorch</span><span class="tag">rag</span><span class="tag">react</span><span class="tag">azure</span><span class="tag">docker</span>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="project">
+            <summary class="project-summary">
+              <div>
+                <div class="project-head">
+                  <div>
+                    <span class="project-title">DE API Developer Portal</span>
+                    <span class="project-company">· Data Equity</span>
+                  </div>
+                  <div class="project-year">2024</div>
+                </div>
+                <div class="project-value">A unified marketplace for API discovery, integration, and monetisation — Swagger, Redoc, GraphQL, billing, and analytics in one place.</div>
+                <div class="project-toggle"><span class="project-toggle-label"></span></div>
+              </div>
+              <div class="project-metric">Swagger · Redoc · GraphQL</div>
+            </summary>
+            <div class="project-body">
+              <div class="case-block">
+                <h4>Problem</h4>
+                <p>API providers want their endpoints discovered and integrated by the right developers fast; developers want a single place to evaluate, try, and pay for APIs without learning a new portal each time.</p>
+              </div>
+              <div class="case-block">
+                <h4>Approach</h4>
+                <ul>
+                  <li>Designed a multi-tenant portal that ingests OpenAPI / GraphQL specs and renders Swagger and Redoc documentation side-by-side.</li>
+                  <li>Modelled flexible commercials — subscription, pay-as-you-go, and freemium — with metered billing baked in.</li>
+                  <li>Pre-built onboarding workflows for sign-up, key issuance, scoped permissions, and review-then-publish for provider-side governance.</li>
+                  <li>Surfaced usage analytics for both providers and consumers to make commercial decisions data-driven.</li>
+                </ul>
+              </div>
+              <div class="case-block">
+                <h4>Impact</h4>
+                <ul>
+                  <li>Cut API time-to-market for providers — list, document, and meter in a single workflow.</li>
+                  <li>Productised the platform that anchors Data Equity's marketplace strategy.</li>
+                </ul>
+              </div>
+              <div class="case-block">
+                <h4>Stack</h4>
+                <div class="work-tags">
+                  <span class="tag">react</span><span class="tag">fastapi</span><span class="tag">postgres</span><span class="tag">azure</span><span class="tag">openapi</span><span class="tag">graphql</span>
+                </div>
+              </div>
+              <a class="case-link" href="https://www.dataequity.io/products/de-marketplace" target="_blank" rel="noopener">
+                dataequity.io/products/de-marketplace <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i>
+              </a>
+            </div>
+          </details>
+
+          <details class="project">
+            <summary class="project-summary">
+              <div>
+                <div class="project-head">
+                  <div>
+                    <span class="project-title">DE Peppol Access Point</span>
+                    <span class="project-company">· Data Equity</span>
+                  </div>
+                  <div class="project-year">2024–25</div>
+                </div>
+                <div class="project-value">Certified Peppol gateway for cross-border eInvoicing — single REST API across 20+ jurisdictions, validated, signed, and audit-trailed.</div>
+                <div class="project-toggle"><span class="project-toggle-label"></span></div>
+              </div>
+              <div class="project-metric">99.95% uptime SLA</div>
+            </summary>
+            <div class="project-body">
+              <div class="case-block">
+                <h4>Problem</h4>
+                <p>Operating Peppol infrastructure independently means dealing with AS4 transport, per-country XML rules, SML lookups, certification, archiving, and a sprawl of jurisdictional quirks. Most ERPs, banks, and platforms shouldn't have to do that themselves.</p>
+              </div>
+              <div class="case-block">
+                <h4>Approach</h4>
+                <ul>
+                  <li>Built a certified Access Point speaking AS4 over TLS 1.3, with sub-second SML lookups for participant registration.</li>
+                  <li>Exposed a single REST API that handles UBL and PINT documents across 20+ jurisdictions (AU, NZ, SG, MY, JP, EU, UK).</li>
+                  <li>Layered BIS 3.0 plus country-specific validation, multi-tenant RBAC, ISO 27001 controls, and tamper-evident archiving.</li>
+                  <li>Sandbox-to-production in days, with data-residency controls per tenant.</li>
+                </ul>
+              </div>
+              <div class="case-block">
+                <h4>Impact</h4>
+                <ul>
+                  <li>99.95% uptime SLA in production.</li>
+                  <li>Lets ERPs, banks, and accounting platforms ship cross-border compliance without standing up their own Peppol stack.</li>
+                </ul>
+              </div>
+              <div class="case-block">
+                <h4>Stack</h4>
+                <div class="work-tags">
+                  <span class="tag">python</span><span class="tag">as4</span><span class="tag">ubl</span><span class="tag">pint</span><span class="tag">azure</span><span class="tag">iso 27001</span>
+                </div>
+              </div>
+              <a class="case-link" href="https://www.dataequity.io/products/de-peppol-access-point" target="_blank" rel="noopener">
+                dataequity.io/products/de-peppol-access-point <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i>
+              </a>
+            </div>
+          </details>
+
+        </div>
       </div>
     </section>
   </main>
