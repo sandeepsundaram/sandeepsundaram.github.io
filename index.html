@@ -689,35 +689,6 @@
     .writing-excerpt { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
     .writing-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; align-self: start; }
 
-    .writing-skeleton {
-      height: 92px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      position: relative;
-      overflow: hidden;
-    }
-    .writing-skeleton::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--text) 8%, transparent) 50%, transparent 100%);
-      animation: shimmer 1.4s ease-in-out infinite;
-    }
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    .writing-fallback {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 0.95rem;
-      color: var(--accent);
-    }
-
     .writing-viewall {
       display: inline-flex;
       align-items: center;
@@ -839,7 +810,7 @@
       body { background: #fff; color: #111; }
 
       .nav, .pdf-btn, .theme-toggle, .nav-burger, .nav-overlay, .hero-orb,
-      .writing-skeleton, .writing-fallback, .project-toggle { display: none !important; }
+      .project-toggle { display: none !important; }
 
       .hero { min-height: auto; padding: 0 0 24px; }
       .hero-inner { grid-template-columns: 1fr; gap: 16px; }
@@ -1257,10 +1228,21 @@
         <div class="section-eyebrow">Writing</div>
         <h2 class="section-title" id="writing-title">Recent posts.</h2>
 
-        <div class="writing-list" id="writingList">
-          <div class="writing-skeleton"></div>
-          <div class="writing-skeleton"></div>
-          <div class="writing-skeleton"></div>
+        <div class="writing-list">
+          <a class="writing-item" href="https://dataequity.medium.com/every-invoice-becomes-a-data-point-how-peppol-is-quietly-creating-finances-next-structured-data-6b7c582add2d" target="_blank" rel="noopener">
+            <div>
+              <div class="writing-title">Every Invoice Becomes a Data Point: How Peppol Is Quietly Creating Finance's Next Structured Data Asset</div>
+              <div class="writing-excerpt">Peppol eInvoicing mandates are turning compliance into a structured commercial-transaction dataset enterprises can monetise.</div>
+            </div>
+            <div class="writing-meta">May 2026</div>
+          </a>
+          <a class="writing-item" href="https://dataequity.medium.com/building-an-ai-powered-chest-x-ray-analysis-platform-transforming-radiology-with-modern-technology-8a84a7b92ea4" target="_blank" rel="noopener">
+            <div>
+              <div class="writing-title">Building an AI-Powered Chest X-Ray Analysis Platform</div>
+              <div class="writing-excerpt">An intelligent X-ray analysis platform combining medical AI with workflow-led design to support radiologist diagnostic accuracy.</div>
+            </div>
+            <div class="writing-meta">Aug 2025</div>
+          </a>
         </div>
 
         <a class="writing-viewall" href="https://dataequity.medium.com/" target="_blank" rel="noopener">
@@ -1409,113 +1391,6 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeMenu();
       });
-
-      // Medium feed
-      // dataequity.medium.com is a publication, so the feed lives at /feed on the same subdomain.
-      // If that returns 0 items, try the user form: https://medium.com/feed/@dataequity
-      var FEED_URL = 'https://dataequity.medium.com/feed';
-      var PROXY_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(FEED_URL);
-      var CACHE_KEY = 'medium-feed-v1';
-      var CACHE_TTL = 30 * 60 * 1000; // 30 minutes
-      var FETCH_TIMEOUT = 5000;
-
-      var writingList = document.getElementById('writingList');
-
-      function renderPosts(posts) {
-        if (!posts || posts.length === 0) {
-          renderFallback();
-          return;
-        }
-        var rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
-        var now = Date.now();
-        var html = posts.slice(0, 4).map(function (p) {
-          var iso = p.pubDate.replace(' ', 'T');
-          var date = new Date(iso.endsWith('Z') ? iso : iso + 'Z');
-          var diffMs = date.getTime() - now;
-          var diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
-          var relative;
-          if (Math.abs(diffDays) >= 30) {
-            var diffMonths = Math.round(diffDays / 30);
-            relative = rtf.format(diffMonths, 'month');
-          } else if (Math.abs(diffDays) >= 1) {
-            relative = rtf.format(diffDays, 'day');
-          } else {
-            relative = 'today';
-          }
-          var excerpt = (p.description || '').replace(/<[^>]*>/g, '').trim().slice(0, 140);
-          if (excerpt.length === 140) excerpt += '…';
-          return (
-            '<a class="writing-item" href="' + escapeHtml(p.link) + '" target="_blank" rel="noopener">' +
-            '<div>' +
-            '<div class="writing-title">' + escapeHtml(p.title) + '</div>' +
-            '<div class="writing-excerpt">' + escapeHtml(excerpt) + '</div>' +
-            '</div>' +
-            '<div class="writing-meta">' + relative + '</div>' +
-            '</a>'
-          );
-        }).join('');
-        writingList.innerHTML = html;
-      }
-
-      function renderFallback() {
-        writingList.innerHTML =
-          '<a class="writing-fallback" href="https://dataequity.medium.com/" target="_blank" rel="noopener">' +
-          'Read all posts on Medium →</a>';
-      }
-
-      function escapeHtml(s) {
-        return String(s)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      }
-
-      function readCache() {
-        try {
-          var raw = localStorage.getItem(CACHE_KEY);
-          if (!raw) return null;
-          var parsed = JSON.parse(raw);
-          if (!parsed || !parsed.timestamp || !parsed.posts) return null;
-          if (Date.now() - parsed.timestamp > CACHE_TTL) return null;
-          return parsed.posts;
-        } catch (e) { return null; }
-      }
-
-      function writeCache(posts) {
-        try {
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), posts: posts }));
-        } catch (e) {}
-      }
-
-      function fetchFeedWithTimeout() {
-        var controller = new AbortController();
-        var timer = setTimeout(function () { controller.abort(); }, FETCH_TIMEOUT);
-        return fetch(PROXY_URL, { signal: controller.signal })
-          .then(function (r) {
-            if (!r.ok) throw new Error('HTTP ' + r.status);
-            return r.json();
-          })
-          .then(function (data) {
-            if (!data || data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Bad feed');
-            return data.items;
-          })
-          .finally(function () { clearTimeout(timer); });
-      }
-
-      // Render from cache instantly if available
-      var cached = readCache();
-      if (cached) renderPosts(cached);
-
-      fetchFeedWithTimeout()
-        .then(function (posts) {
-          writeCache(posts);
-          renderPosts(posts);
-        })
-        .catch(function (err) {
-          console.warn('Medium feed unavailable:', err);
-          if (!cached) renderFallback();
-        });
 
       // Auto-expand details for print
       var allDetails = document.querySelectorAll('details');
