@@ -236,6 +236,141 @@
         justify-content: center;
       }
     }
+
+    /* === Hero === */
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: var(--section-y) 0 calc(var(--section-y) * 0.6);
+    }
+
+    .hero-orb {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 60%);
+      filter: blur(40px);
+      top: -200px;
+      right: -200px;
+      z-index: 0;
+      animation: orb-float 14s ease-in-out infinite;
+    }
+    [data-theme='light'] .hero-orb {
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 60%);
+    }
+
+    @keyframes orb-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-60px, 40px) scale(1.05); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin-bottom: 24px;
+    }
+
+    .hero-headline .accent {
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subline {
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: 40px;
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      font-family: var(--mono);
+    }
+
+    .hero-metric {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hero-metric-num {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .hero-metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-avatar { width: 120px; height: 120px; order: -1; }
+    }
   </style>
 </head>
 
@@ -280,10 +415,45 @@
   </div>
 
   <main id="main" tabindex="-1">
-    <div class="container">
-      <h1>Sandeep Sundaram</h1>
-      <p>Scaffold in progress.</p>
-    </div>
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero-orb" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div>
+          <div class="hero-eyebrow">Engineering Leader · Cofounder</div>
+          <h1 class="hero-headline" id="hero-headline">
+            I build engineering<br />
+            <span class="accent">teams that ship.</span>
+          </h1>
+          <p class="hero-subline">
+            21 years across energy, utilities, ERP, and AI. Cofounder, architect, and
+            people-first leader — currently building Data Equity.
+          </p>
+          <div class="hero-metrics">
+            <div class="hero-metric">
+              <div class="hero-metric-num">21+</div>
+              <div class="hero-metric-label">years experience</div>
+            </div>
+            <div class="hero-metric">
+              <div class="hero-metric-num">£140M</div>
+              <div class="hero-metric-label">transformation delivered</div>
+            </div>
+            <div class="hero-metric">
+              <div class="hero-metric-num">25</div>
+              <div class="hero-metric-label">engineers led</div>
+            </div>
+          </div>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/sandeepsundaram/" target="_blank" rel="noopener">
+              Connect on LinkedIn <i data-lucide="arrow-up-right" style="width:18px;height:18px;"></i>
+            </a>
+            <a class="btn btn-secondary" href="#work">
+              See my work <i data-lucide="arrow-down" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
+        </div>
+        <img class="hero-avatar" src="static/img/sandeep.jpeg" alt="Sandeep Sundaram" />
+      </div>
+    </section>
   </main>
 
   <script>
