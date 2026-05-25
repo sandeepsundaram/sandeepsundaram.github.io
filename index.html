@@ -717,6 +717,73 @@
       margin-bottom: 14px;
     }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* === Contact / footer === */
+    .contact {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: var(--section-y) 0 80px;
+      text-align: center;
+    }
+    .contact-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .contact-sub {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-cta { margin-bottom: 40px; }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s ease;
+    }
+    .contact-links a:hover { color: var(--text); }
+
+    .colophon {
+      margin-top: 48px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* === Floating PDF button === */
+    .pdf-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+      z-index: 90;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pdf-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(99, 102, 241, 0.5); }
   </style>
 </head>
 
@@ -1144,6 +1211,32 @@
       </div>
     </section>
   </main>
+
+  <footer class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <h2 class="contact-title" id="contact-title">Let's talk.</h2>
+      <p class="contact-sub">
+        I'm always up for a conversation about engineering teams, API platforms, data, and AI.
+      </p>
+      <div class="contact-cta">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/sandeepsundaram/" target="_blank" rel="noopener">
+          Connect on LinkedIn <i data-lucide="arrow-up-right" style="width:18px;height:18px;"></i>
+        </a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:sandeep.sundaram@gmail.com"><i data-lucide="mail" style="width:14px;height:14px;"></i> sandeep.sundaram@gmail.com</a>
+        <a href="tel:+447466610630"><i data-lucide="phone" style="width:14px;height:14px;"></i> +44 (0) 7466 610630</a>
+        <a href="https://dataequity.medium.com/" target="_blank" rel="noopener"><i data-lucide="book-open" style="width:14px;height:14px;"></i> Medium</a>
+        <a href="https://github.com/sandeepsundaram" target="_blank" rel="noopener"><i data-lucide="github" style="width:14px;height:14px;"></i> GitHub</a>
+        <span><i data-lucide="map-pin" style="width:14px;height:14px;"></i> Slough, UK</span>
+      </div>
+      <div class="colophon">© 2026 Sandeep Sundaram · Last updated 2026-05-25</div>
+    </div>
+  </footer>
+
+  <button class="pdf-btn" onclick="window.print()" aria-label="Download as PDF">
+    <i data-lucide="download" style="width:16px;height:16px;"></i> Download PDF
+  </button>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
