@@ -398,6 +398,124 @@
     }
     .about-body p + p { margin-top: 16px; }
     .about-body strong { color: var(--text); font-weight: 600; }
+
+    /* === Work timeline === */
+    .work-list {
+      position: relative;
+      padding-left: 32px;
+      max-width: 880px;
+    }
+    .work-list::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 100%);
+      border-radius: 2px;
+    }
+
+    .work-item {
+      position: relative;
+      padding: 0 0 40px 0;
+    }
+    .work-item:last-child { padding-bottom: 0; }
+    .work-item::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--bg);
+    }
+
+    .work-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .work-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .work-company { color: var(--accent); font-weight: 500; }
+    .work-dates {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .work-bullets {
+      list-style: none;
+      color: var(--text-muted);
+      margin: 12px 0 16px;
+    }
+    .work-bullets li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    .work-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 6px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    .work-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      padding: 3px 9px;
+      border-radius: 999px;
+      text-transform: lowercase;
+    }
+
+    /* Earlier roles collapsible */
+    .earlier-roles {
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .earlier-roles summary {
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    .earlier-roles summary::-webkit-details-marker { display: none; }
+    .earlier-roles summary::after {
+      content: '↓';
+      transition: transform 0.2s ease;
+    }
+    .earlier-roles[open] summary::after { transform: rotate(180deg); }
+    .earlier-roles summary:hover { color: var(--text); }
+    .earlier-roles .work-item:first-of-type { padding-top: 24px; }
   </style>
 </head>
 
@@ -500,6 +618,114 @@
             — and the teams that ship it.
           </p>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-eyebrow">Work</div>
+        <h2 class="section-title" id="work-title">21 years of leading teams that ship.</h2>
+
+        <ol class="work-list">
+          <li class="work-item">
+            <div class="work-head">
+              <div>
+                <div class="work-title">Cofounder &amp; Director of AI</div>
+                <div class="work-company">Data Equity Ltd</div>
+              </div>
+              <div class="work-dates">Mar 2023 – Present</div>
+            </div>
+            <ul class="work-bullets">
+              <li>Built and scaled the engineering function for a SaaS data-monetisation platform; £120K ARR in year one.</li>
+              <li>Shipped a generative-AI API schema builder trained on 16,000+ definitions and a RAG-based enterprise contract generator (+60% automation).</li>
+              <li>Recruited and mentored a cross-disciplinary team across frontend, backend, DevOps, and data science.</li>
+            </ul>
+            <div class="work-tags">
+              <span class="tag">python</span><span class="tag">react</span><span class="tag">azure</span><span class="tag">rag</span><span class="tag">peppol</span>
+            </div>
+          </li>
+
+          <li class="work-item">
+            <div class="work-head">
+              <div>
+                <div class="work-title">Ex-Cofounder &amp; CTO</div>
+                <div class="work-company">Perse Technologies Ltd</div>
+              </div>
+              <div class="work-dates">Feb 2020 – Feb 2023</div>
+            </div>
+            <ul class="work-bullets">
+              <li>Led technical vision and a 15-person engineering team for a consumer energy-switching platform serving 50k+ concurrent users.</li>
+              <li>Designed and shipped a fully automated utility-switching system, cutting manual interventions by 80% and saving customers £200/year on average.</li>
+              <li>Established agile process and code-review standards across distributed teams.</li>
+            </ul>
+            <div class="work-tags">
+              <span class="tag">python</span><span class="tag">node</span><span class="tag">react</span><span class="tag">aws</span>
+            </div>
+          </li>
+
+          <li class="work-item">
+            <div class="work-head">
+              <div>
+                <div class="work-title">Principal Architect</div>
+                <div class="work-company">Enzen Global UK</div>
+              </div>
+              <div class="work-dates">Jan 2014 – Feb 2020</div>
+            </div>
+            <ul class="work-bullets">
+              <li>Architected the integration strategy for a £140M transformation at UK Power Networks across SAP, SCADA, telephony, and workforce management.</li>
+              <li>Directed 20 engineers and consultants across four major releases; awarded 'Stellar Performer' for leadership and delivery.</li>
+            </ul>
+            <div class="work-tags">
+              <span class="tag">soa</span><span class="tag">sap</span><span class="tag">integration</span><span class="tag">energy</span>
+            </div>
+          </li>
+
+          <li class="work-item">
+            <div class="work-head">
+              <div>
+                <div class="work-title">Solutions Architect</div>
+                <div class="work-company">Apigee Technologies (Google)</div>
+              </div>
+              <div class="work-dates">Nov 2011 – Jan 2014</div>
+            </div>
+            <ul class="work-bullets">
+              <li>Drove migrations and architectural design for 20+ enterprise API gateway customers including Dell, Intel, and Vodafone.</li>
+              <li>Won 'Action and Passion' award (CEO) for customer delivery excellence.</li>
+            </ul>
+            <div class="work-tags">
+              <span class="tag">apigee</span><span class="tag">api</span><span class="tag">enterprise</span>
+            </div>
+          </li>
+
+          <details class="earlier-roles">
+            <summary>Earlier roles (Oracle, Accenture, 2004–2011)</summary>
+            <li class="work-item">
+              <div class="work-head">
+                <div>
+                  <div class="work-title">Principal Software Engineer</div>
+                  <div class="work-company">Oracle India</div>
+                </div>
+                <div class="work-dates">Jun 2005 – Nov 2011</div>
+              </div>
+              <ul class="work-bullets">
+                <li>Designed and delivered the first AIA integration using Oracle Fusion middleware; re-architected the PLM module on Oracle ADF.</li>
+                <li>Led the Agile PLM → Oracle Manufacturing synchronisation project.</li>
+              </ul>
+            </li>
+            <li class="work-item">
+              <div class="work-head">
+                <div>
+                  <div class="work-title">Software Engineer</div>
+                  <div class="work-company">Accenture</div>
+                </div>
+                <div class="work-dates">Jan 2004 – Jun 2005</div>
+              </div>
+              <ul class="work-bullets">
+                <li>Developed an HRIS for employee career management; received ACE Excellence Award.</li>
+              </ul>
+            </li>
+          </details>
+        </ol>
       </div>
     </section>
   </main>
