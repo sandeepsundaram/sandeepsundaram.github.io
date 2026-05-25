@@ -1146,7 +1146,8 @@
         var rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
         var now = Date.now();
         var html = posts.slice(0, 4).map(function (p) {
-          var date = new Date(p.pubDate.replace(' ', 'T') + 'Z');
+          var iso = p.pubDate.replace(' ', 'T');
+          var date = new Date(iso.endsWith('Z') ? iso : iso + 'Z');
           var diffMs = date.getTime() - now;
           var diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
           var relative;
@@ -1161,7 +1162,7 @@
           var excerpt = (p.description || '').replace(/<[^>]*>/g, '').trim().slice(0, 140);
           if (excerpt.length === 140) excerpt += '…';
           return (
-            '<a class="writing-item" href="' + p.link + '" target="_blank" rel="noopener">' +
+            '<a class="writing-item" href="' + escapeHtml(p.link) + '" target="_blank" rel="noopener">' +
             '<div>' +
             '<div class="writing-title">' + escapeHtml(p.title) + '</div>' +
             '<div class="writing-excerpt">' + escapeHtml(excerpt) + '</div>' +
@@ -1209,14 +1210,14 @@
         var timer = setTimeout(function () { controller.abort(); }, FETCH_TIMEOUT);
         return fetch(PROXY_URL, { signal: controller.signal })
           .then(function (r) {
-            clearTimeout(timer);
             if (!r.ok) throw new Error('HTTP ' + r.status);
             return r.json();
           })
           .then(function (data) {
             if (!data || data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Bad feed');
             return data.items;
-          });
+          })
+          .finally(function () { clearTimeout(timer); });
       }
 
       // Render from cache instantly if available
