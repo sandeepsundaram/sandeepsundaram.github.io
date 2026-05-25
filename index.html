@@ -371,6 +371,33 @@
       .hero-inner { grid-template-columns: 1fr; }
       .hero-avatar { width: 120px; height: 120px; order: -1; }
     }
+
+    /* === Section titles === */
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+
+    /* === About === */
+    .about-body {
+      max-width: 720px;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .about-body p + p { margin-top: 16px; }
+    .about-body strong { color: var(--text); font-weight: 600; }
   </style>
 </head>
 
@@ -453,6 +480,26 @@
         </div>
         <img class="hero-avatar" src="static/img/sandeep.jpeg" alt="Sandeep Sundaram"
      width="180" height="180" decoding="async" fetchpriority="high" />
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-eyebrow">About</div>
+        <h2 class="section-title" id="about-title">Right now I'm building Data Equity.</h2>
+        <div class="about-body">
+          <p>
+            A SaaS platform that lets enterprises <strong>monetise data through APIs</strong> — from
+            AI-powered API schema design to a certified Peppol gateway for cross-border eInvoicing.
+            We're profitable in year one and growing.
+          </p>
+          <p>
+            Before this, I cofounded an energy-switching platform serving 50k+ concurrent users,
+            architected a £140M transformation at UK Power Networks, and led Apigee's enterprise
+            migrations for Dell, Intel, and Vodafone. Two decades of shipping enterprise software
+            — and the teams that ship it.
+          </p>
+        </div>
       </div>
     </section>
   </main>
