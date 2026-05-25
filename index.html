@@ -517,6 +517,11 @@
     }
 
     /* Earlier roles collapsible */
+    .earlier-roles-wrap {
+      list-style: none;
+      padding: 0;
+    }
+    .earlier-roles-wrap::before { display: none; }
     .earlier-roles {
       margin-top: 16px;
       border-top: 1px solid var(--border);
@@ -539,6 +544,11 @@
     }
     .earlier-roles[open] summary::after { transform: rotate(180deg); }
     .earlier-roles summary:hover { color: var(--text); }
+    .earlier-roles-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
     .earlier-roles .work-item:first-of-type { padding-top: 24px; }
 
     /* === Projects === */
@@ -609,7 +619,7 @@
       gap: 20px;
     }
 
-    .case-block h4 {
+    .case-block h3 {
       font-family: var(--mono);
       font-size: 0.8rem;
       color: var(--accent);
@@ -617,6 +627,7 @@
       letter-spacing: 0.05em;
       margin-bottom: 8px;
       margin-top: 16px;
+      font-weight: 600;
     }
     .case-block p, .case-block li { color: var(--text-muted); line-height: 1.7; }
     .case-block ul { list-style: none; }
@@ -732,13 +743,14 @@
       border-radius: var(--radius-lg);
       padding: 20px 22px;
     }
-    .skill-cat h4 {
+    .skill-cat h3 {
       font-size: 0.85rem;
       font-family: var(--mono);
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 14px;
+      font-weight: 600;
     }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
@@ -1031,34 +1043,38 @@
             </div>
           </li>
 
-          <details class="earlier-roles">
-            <summary>Earlier roles (Oracle, Accenture, 2004–2011)</summary>
-            <li class="work-item">
-              <div class="work-head">
-                <div>
-                  <div class="work-title">Principal Software Engineer</div>
-                  <div class="work-company">Oracle India</div>
-                </div>
-                <div class="work-dates">Jun 2005 – Nov 2011</div>
-              </div>
-              <ul class="work-bullets">
-                <li>Designed and delivered the first AIA integration using Oracle Fusion middleware; re-architected the PLM module on Oracle ADF.</li>
-                <li>Led the Agile PLM → Oracle Manufacturing synchronisation project.</li>
-              </ul>
-            </li>
-            <li class="work-item">
-              <div class="work-head">
-                <div>
-                  <div class="work-title">Software Engineer</div>
-                  <div class="work-company">Accenture</div>
-                </div>
-                <div class="work-dates">Jan 2004 – Jun 2005</div>
-              </div>
-              <ul class="work-bullets">
-                <li>Developed an HRIS for employee career management; received ACE Excellence Award.</li>
-              </ul>
-            </li>
-          </details>
+          <li class="earlier-roles-wrap">
+            <details class="earlier-roles">
+              <summary>Earlier roles (Oracle, Accenture, 2004–2011)</summary>
+              <ol class="earlier-roles-list">
+                <li class="work-item">
+                  <div class="work-head">
+                    <div>
+                      <div class="work-title">Principal Software Engineer</div>
+                      <div class="work-company">Oracle India</div>
+                    </div>
+                    <div class="work-dates">Jun 2005 – Nov 2011</div>
+                  </div>
+                  <ul class="work-bullets">
+                    <li>Designed and delivered the first AIA integration using Oracle Fusion middleware; re-architected the PLM module on Oracle ADF.</li>
+                    <li>Led the Agile PLM → Oracle Manufacturing synchronisation project.</li>
+                  </ul>
+                </li>
+                <li class="work-item">
+                  <div class="work-head">
+                    <div>
+                      <div class="work-title">Software Engineer</div>
+                      <div class="work-company">Accenture</div>
+                    </div>
+                    <div class="work-dates">Jan 2004 – Jun 2005</div>
+                  </div>
+                  <ul class="work-bullets">
+                    <li>Developed an HRIS for employee career management; received ACE Excellence Award.</li>
+                  </ul>
+                </li>
+              </ol>
+            </details>
+          </li>
         </ol>
       </div>
     </section>
@@ -1087,11 +1103,11 @@
             </summary>
             <div class="project-body">
               <div class="case-block">
-                <h4>Problem</h4>
+                <h3>Problem</h3>
                 <p>Enterprise API teams spend weeks turning ideas into well-formed, consistent API contracts, and even longer drafting the legal contracts that govern their use. We wanted to compress both into minutes without losing the rigour.</p>
               </div>
               <div class="case-block">
-                <h4>Approach</h4>
+                <h3>Approach</h3>
                 <ul>
                   <li>Fine-tuned a generative model on a corpus of 16,000+ OpenAPI definitions to suggest endpoints, schemas, and naming conventions matching house style.</li>
                   <li>Built a RAG pipeline over enterprise contract templates so the generator could draft clause-level language grounded in real precedent.</li>
@@ -1099,14 +1115,14 @@
                 </ul>
               </div>
               <div class="case-block">
-                <h4>Impact</h4>
+                <h3>Impact</h3>
                 <ul>
                   <li>60% lift in document automation efficiency for enterprise contract drafting.</li>
                   <li>Anchor capability for Data Equity's commercial launch — first ARR landed within the first year.</li>
                 </ul>
               </div>
               <div class="case-block">
-                <h4>Stack</h4>
+                <h3>Stack</h3>
                 <div class="work-tags">
                   <span class="tag">python</span><span class="tag">pytorch</span><span class="tag">rag</span><span class="tag">react</span><span class="tag">azure</span><span class="tag">docker</span>
                 </div>
@@ -1131,11 +1147,11 @@
             </summary>
             <div class="project-body">
               <div class="case-block">
-                <h4>Problem</h4>
+                <h3>Problem</h3>
                 <p>API providers want their endpoints discovered and integrated by the right developers fast; developers want a single place to evaluate, try, and pay for APIs without learning a new portal each time.</p>
               </div>
               <div class="case-block">
-                <h4>Approach</h4>
+                <h3>Approach</h3>
                 <ul>
                   <li>Designed a multi-tenant portal that ingests OpenAPI / GraphQL specs and renders Swagger and Redoc documentation side-by-side.</li>
                   <li>Modelled flexible commercials — subscription, pay-as-you-go, and freemium — with metered billing baked in.</li>
@@ -1144,14 +1160,14 @@
                 </ul>
               </div>
               <div class="case-block">
-                <h4>Impact</h4>
+                <h3>Impact</h3>
                 <ul>
                   <li>Cut API time-to-market for providers — list, document, and meter in a single workflow.</li>
                   <li>Productised the platform that anchors Data Equity's marketplace strategy.</li>
                 </ul>
               </div>
               <div class="case-block">
-                <h4>Stack</h4>
+                <h3>Stack</h3>
                 <div class="work-tags">
                   <span class="tag">react</span><span class="tag">fastapi</span><span class="tag">postgres</span><span class="tag">azure</span><span class="tag">openapi</span><span class="tag">graphql</span>
                 </div>
@@ -1179,11 +1195,11 @@
             </summary>
             <div class="project-body">
               <div class="case-block">
-                <h4>Problem</h4>
+                <h3>Problem</h3>
                 <p>Operating Peppol infrastructure independently means dealing with AS4 transport, per-country XML rules, SML lookups, certification, archiving, and a sprawl of jurisdictional quirks. Most ERPs, banks, and platforms shouldn't have to do that themselves.</p>
               </div>
               <div class="case-block">
-                <h4>Approach</h4>
+                <h3>Approach</h3>
                 <ul>
                   <li>Built a certified Access Point speaking AS4 over TLS 1.3, with sub-second SML lookups for participant registration.</li>
                   <li>Exposed a single REST API that handles UBL and PINT documents across 20+ jurisdictions (AU, NZ, SG, MY, JP, EU, UK).</li>
@@ -1192,14 +1208,14 @@
                 </ul>
               </div>
               <div class="case-block">
-                <h4>Impact</h4>
+                <h3>Impact</h3>
                 <ul>
                   <li>99.95% uptime SLA in production.</li>
                   <li>Lets ERPs, banks, and accounting platforms ship cross-border compliance without standing up their own Peppol stack.</li>
                 </ul>
               </div>
               <div class="case-block">
-                <h4>Stack</h4>
+                <h3>Stack</h3>
                 <div class="work-tags">
                   <span class="tag">python</span><span class="tag">as4</span><span class="tag">ubl</span><span class="tag">pint</span><span class="tag">azure</span><span class="tag">iso 27001</span>
                 </div>
@@ -1238,37 +1254,37 @@
 
         <div class="skills-grid">
           <div class="skill-cat">
-            <h4>Languages</h4>
+            <h3>Languages</h3>
             <div class="skill-tags">
               <span class="tag">python</span><span class="tag">java</span><span class="tag">node</span><span class="tag">javascript</span>
             </div>
           </div>
           <div class="skill-cat">
-            <h4>Frontend</h4>
+            <h3>Frontend</h3>
             <div class="skill-tags">
               <span class="tag">react</span><span class="tag">angular</span><span class="tag">flask</span><span class="tag">html5</span><span class="tag">css3</span>
             </div>
           </div>
           <div class="skill-cat">
-            <h4>Cloud &amp; DevOps</h4>
+            <h3>Cloud &amp; DevOps</h3>
             <div class="skill-tags">
               <span class="tag">aws</span><span class="tag">azure</span><span class="tag">gcp</span><span class="tag">docker</span><span class="tag">jenkins</span>
             </div>
           </div>
           <div class="skill-cat">
-            <h4>API &amp; integration</h4>
+            <h3>API &amp; integration</h3>
             <div class="skill-tags">
               <span class="tag">apigee</span><span class="tag">mulesoft</span><span class="tag">fastapi</span><span class="tag">azure api mgr</span><span class="tag">datapower</span>
             </div>
           </div>
           <div class="skill-cat">
-            <h4>Data</h4>
+            <h3>Data</h3>
             <div class="skill-tags">
               <span class="tag">oracle</span><span class="tag">postgres</span><span class="tag">mongodb</span><span class="tag">mysql</span><span class="tag">dynamodb</span>
             </div>
           </div>
           <div class="skill-cat">
-            <h4>Domain</h4>
+            <h3>Domain</h3>
             <div class="skill-tags">
               <span class="tag">energy &amp; utilities</span><span class="tag">open banking</span><span class="tag">erp</span><span class="tag">peppol</span><span class="tag">ai</span>
             </div>
