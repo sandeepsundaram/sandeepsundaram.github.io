@@ -142,7 +142,7 @@ Card content:
 
 ### 5.4 Writing (Medium feed)
 
-- Source: `https://medium.com/feed/@dataequity` via `api.rss2json.com` proxy.
+- Source: `https://dataequity.medium.com/feed` (publication feed) via `api.rss2json.com` proxy. Fallback URL `https://medium.com/feed/@dataequity` if the publication form returns no items.
 - Render up to 4 most recent posts: title (link), relative date (`Intl.RelativeTimeFormat`), 120-char excerpt with HTML stripped, link to canonical Medium URL.
 - "View all on Medium →" link at the bottom.
 - Loading state: 3 skeleton rows.
